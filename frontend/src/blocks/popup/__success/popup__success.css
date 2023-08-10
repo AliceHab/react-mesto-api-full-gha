@@ -1,0 +1,8 @@
+.popup__success {
+  background: url("../../../images/popup__success.svg") no-repeat;
+  object-fit: cover;
+  object-position: center;
+  width: 120px;
+  height: 120px;
+  align-self: center;
+}

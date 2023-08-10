@@ -1,0 +1,4 @@
+.elements__like-wrapper {
+  display: flex;
+  flex-direction: column;
+}

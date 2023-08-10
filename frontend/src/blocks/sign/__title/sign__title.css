@@ -1,0 +1,14 @@
+.sign__title {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-family: Inter;
+  font-weight: 900;
+}
+
+@media (max-width: 500px) {
+  .sign__title {
+    font-size: 20px;
+  }
+}
