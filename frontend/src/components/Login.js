@@ -26,7 +26,6 @@ function Login({ isLoggedIn, setIsLogged, setEmail }) {
           setShowInfo(true);
           setIsLogged(true);
           setTextInfo("Входим...");
-          localStorage.setItem("jwt", res.token);
           setTimeout(() => {
             navigate("/", { replace: true });
             setEmail(values.email);

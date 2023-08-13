@@ -1,18 +1,18 @@
-import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Header from "./Header.js";
-import Main from "./Main.js";
-import api from "../utils/api";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import Login from "./Login";
-import Register from "./Register";
-import ProtectedRoute from "./ProtectedRoute";
-import ImagePopup from "./ImagePopup.js";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { AppContext } from "../contexts/AppContext";
-import auth from "../utils/auth";
+import React from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Header from './Header.js';
+import Main from './Main.js';
+import api from '../utils/api';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
+import ImagePopup from './ImagePopup.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { AppContext } from '../contexts/AppContext';
+import auth from '../utils/auth';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -24,7 +24,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isLoggedIn, setLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState('');
 
   const navigate = useNavigate();
 
@@ -35,18 +35,20 @@ function App() {
   // Проверяем токен
   const checkTocken = () => {
     auth
-      .getContent(localStorage.getItem("jwt"))
+      .getContent()
       .then((res) => {
         if (!res) {
           return;
         }
+        console.log(res)
         setEmail(res.data.email);
         setLoggedIn(true);
-        navigate("/");
+        setCurrentUser(res);
+        navigate('/');
       })
       .catch((err) => {
         setLoggedIn(false);
-        navigate("/signin");
+        navigate('/signin');
         console.error(err);
       });
   };
@@ -69,7 +71,7 @@ function App() {
       api
         .getInitialCards()
         .then((dataCards) => {
-          setCards(dataCards);
+          setCards(dataCards.data);
         })
         .catch((err) => console.error(err));
     }
@@ -78,12 +80,12 @@ function App() {
   // Обработчики для компонентов попапов
   // Общие
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser.data._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c)));
       })
       .catch((err) => console.error(err));
   }
@@ -107,7 +109,9 @@ function App() {
   // Обработчик редактирования пользователя
   function handleUpdateUser(data) {
     function makeRequest() {
-      return api.editUserInfo(data).then(setCurrentUser);
+      return api.editUserInfo(data).then((newData) => {
+        setCurrentUser(newData.data);
+      });
     }
     handleSubmit(makeRequest);
   }
@@ -122,7 +126,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     function makeRequest() {
       return api.postCard(data).then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([newCard.data, ...cards]);
       });
     }
     handleSubmit(makeRequest);
@@ -140,14 +144,14 @@ function App() {
 
   React.useEffect(() => {
     function closeByEscape(evt) {
-      if (evt.key === "Escape") {
+      if (evt.key === 'Escape') {
         closeAllPopups();
       }
     }
     if (isOpen) {
-      document.addEventListener("keydown", closeByEscape);
+      document.addEventListener('keydown', closeByEscape);
       return () => {
-        document.removeEventListener("keydown", closeByEscape);
+        document.removeEventListener('keydown', closeByEscape);
       };
     }
   }, [isOpen]);

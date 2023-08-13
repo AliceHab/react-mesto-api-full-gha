@@ -5,7 +5,8 @@ class Auth {
   }
 
   _checkResponse(res) {
-    if (res.ok) {
+    console.log('Server Response:', res);
+    if (res.ok || res.status === 304) {
       return res.json();
     }
 
@@ -13,41 +14,50 @@ class Auth {
   }
 
   _request(url, options) {
-    return fetch(url, options).then(this._checkResponse);
+    return fetch(url, options).then((res) => {
+      res
+        .clone()
+        .json()
+        .then((data) => console.log(data));
+      return this._checkResponse(res);
+    });
   }
 
   registerUser(password, email) {
     return this._request(`${this._baseUrl}/signup`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ password, email }),
+      credentials: 'include',
     });
   }
 
   loginUser(password, email) {
     return this._request(`${this._baseUrl}/signin`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ password, email }),
+      credentials: 'include',
     });
   }
 
-  getContent(token) {
+  getContent() {
     return this._request(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
   }
 }
 
 const auth = new Auth({
-  baseUrl: "https://auth.nomoreparties.co",
+  baseUrl: 'http://localhost:4000',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
+  credentials: 'include',
 });
 
 export default auth;

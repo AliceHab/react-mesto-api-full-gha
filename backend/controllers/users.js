@@ -5,6 +5,7 @@ const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-req-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
+const cookieParser = require('cookie-parser');
 
 module.exports.getUsers = (req, res) => {
   User.find({})
@@ -85,7 +86,13 @@ module.exports.login = (req, res, next) => {
         },
       );
 
-      res.send({ token });
+      res.cookie( 'jwt', token, {
+        maxAge: 604900,
+        httpOnly: true,
+        sameSite: true,
+      });
+
+      return res.status(200).send({user})
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

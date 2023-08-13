@@ -1,7 +1,7 @@
-import React from "react";
-import Card from "./Card";
-import Footer from "./Footer.js";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import Card from './Card';
+import Footer from './Footer.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({
   onEditProfile,
@@ -19,14 +19,14 @@ function Main({
       <section className="profile">
         <div className="profile__user">
           <button className="profile__edit-avatar" type="button" onClick={onEditAvatar}>
-            <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
+            <img className="profile__avatar" src={currentUser.data.avatar} alt="Аватар" />
           </button>
           <div className="profile__user-info">
             <div className="profile__edit-name">
-              <h1 className="profile__user-name">{currentUser.name}</h1>
+              <h1 className="profile__user-name">{currentUser.data.name}</h1>
               <button className="profile__edit-button" type="button" onClick={onEditProfile} />
             </div>
-            <p className="profile__user-describe">{currentUser.about}</p>
+            <p className="profile__user-describe">{currentUser.data.about}</p>
           </div>
         </div>
         <button className="profile__add-button" type="button" onClick={onAddPlace} />

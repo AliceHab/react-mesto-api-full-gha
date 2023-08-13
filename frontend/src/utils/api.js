@@ -17,15 +17,18 @@ class Api {
   }
 
   getUserInfo() {
+    this._headers['Cache-Control'] = 'no-cache';
     return this._request(`${this._baseUrl}/users/me`, {
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
   editUserInfo(data) {
     return this._request(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -36,12 +39,14 @@ class Api {
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
       headers: this._headers,
+      credentials: 'include',
     });
   }
 
   postCard(data) {
     return this._request(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
+      credentials: 'include',
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -52,7 +57,8 @@ class Api {
 
   editAvatar(data) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -62,21 +68,24 @@ class Api {
 
   like(cardID) {
     return this._request(`${this._baseUrl}/cards/${cardID}/likes`, {
-      method: "PUT",
+      method: 'PUT',
+      credentials: 'include',
       headers: this._headers,
     });
   }
 
   deleteLike(cardID) {
     return this._request(`${this._baseUrl}/cards/${cardID}/likes`, {
-      method: "DELETE",
+      method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     });
   }
 
   deleteCard(cardID) {
     return this._request(`${this._baseUrl}/cards/${cardID}`, {
-      method: "DELETE",
+      method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     });
   }
@@ -91,10 +100,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-65",
+  baseUrl: 'http://localhost:4000',
   headers: {
-    authorization: "2123c628-f1b5-4ce0-be41-8740d5e266d9",
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
