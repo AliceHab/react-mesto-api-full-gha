@@ -1,0 +1,19 @@
+.header__nav-link {
+  color: #fff;
+  text-align: right;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  text-decoration: none;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 400px) {
+  .header__nav-link {
+    font-size: 14px;
+  }
+}

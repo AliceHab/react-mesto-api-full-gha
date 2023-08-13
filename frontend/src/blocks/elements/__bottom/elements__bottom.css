@@ -1,0 +1,7 @@
+.elements__bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 21px 19px 0 21px;
+}

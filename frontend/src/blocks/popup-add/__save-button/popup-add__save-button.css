@@ -1,0 +1,14 @@
+.popup-add__save-button {
+  padding: 17px 179px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .popup-add__save-button {
+    padding: 14px 82px;
+    margin-top: 45px;
+  }
+}

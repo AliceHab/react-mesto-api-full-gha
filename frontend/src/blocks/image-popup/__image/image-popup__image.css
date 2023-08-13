@@ -1,0 +1,13 @@
+.image-popup__image {
+  height: 540px;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 500px) {
+  .image-popup__image {
+    max-height: 299px;
+    max-width: 250px;
+  }
+}

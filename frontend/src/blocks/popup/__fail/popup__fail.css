@@ -1,0 +1,8 @@
+.popup__fail {
+  background: url("../../../images/popup__fail.svg");
+  object-fit: cover;
+  object-position: center;
+  width: 120px;
+  height: 120px;
+  align-self: center;
+}

@@ -1,0 +1,29 @@
+.sign__button {
+  background: rgba(255, 255, 255, 1);
+  border-radius: 2px;
+  border: none;
+  padding: 14px 150px;
+  max-width: 358px;
+  margin-top: 216px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 1);
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.sign__button:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 400px) {
+  .sign__button {
+    font-size: 16px;
+    max-width: 260px;
+    margin-top: 168px;
+  }
+}

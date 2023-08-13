@@ -1,0 +1,11 @@
+.image-popup__exit {
+  right: -38px;
+  top: -42px;
+}
+
+@media (max-width: 500px) {
+  .image-popup__exit {
+    right: -3px;
+    top: -35px;
+  }
+}
