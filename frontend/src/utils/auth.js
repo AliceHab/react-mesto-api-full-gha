@@ -53,7 +53,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'api.alicehab.nomoreparties.co',
+  baseUrl: 'https://api.alicehab.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json',
   },
