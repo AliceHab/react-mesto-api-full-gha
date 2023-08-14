@@ -53,7 +53,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'api.alicehab.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json',
   },
