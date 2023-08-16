@@ -100,7 +100,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'api.alicehab.nomoreparties.co',
+  baseUrl: 'https://api.alicehab.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json',
   },
