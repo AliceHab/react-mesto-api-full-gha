@@ -32,6 +32,9 @@ function App() {
     setLoggedIn(true);
   }
 
+  console.log(currentUser)
+
+
   // Проверяем токен
   const checkTocken = () => {
     auth
@@ -110,7 +113,7 @@ function App() {
   function handleUpdateUser(data) {
     function makeRequest() {
       return api.editUserInfo(data).then((newData) => {
-        setCurrentUser(newData.data);
+        setCurrentUser(newData);
       });
     }
     handleSubmit(makeRequest);
