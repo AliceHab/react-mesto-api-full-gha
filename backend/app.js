@@ -42,6 +42,12 @@ mongoose.connect(DB_URL, {});
 // логгер запросов
 app.use(requestLogger);
 
+app.get('/crash-test', () => { // удалить после ревью
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post(
   '/signup',
   celebrate({
