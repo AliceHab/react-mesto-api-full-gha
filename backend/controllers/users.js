@@ -9,6 +9,7 @@ const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 
 require('dotenv').config();
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
@@ -106,6 +107,16 @@ module.exports.login = (req, res, next) => {
       }
     })
     .catch(next);
+};
+
+module.exports.signOut = (req, res, next) => {
+  res.clearCookie('jwt', {
+    maxAge: 604900,
+    httpOnly: true,
+    sameSite: true,
+  });
+
+  res.status(200).send({ message: 'Cookie cleared' }).catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {

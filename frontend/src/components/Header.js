@@ -1,33 +1,35 @@
-import logo from "../images/logo.svg";
-import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from '../images/logo.svg';
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../utils/auth';
 
 function Header({ email, setEmail }) {
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();
 
-  let linkTo = "";
-  let linkText = "";
+  let linkTo = '';
+  let linkText = '';
   let handleClick = null;
 
   function signOut() {
-    localStorage.removeItem("jwt");
-    navigate("/signin");
-    setEmail("");
+    // localStorage.removeItem("jwt");
+    auth.signOut()
+    navigate('/signin');
+    setEmail('');
   }
 
-  if (pathname === "/signup") {
-    linkTo = "/signin";
-    linkText = "Войти";
+  if (pathname === '/signup') {
+    linkTo = '/signin';
+    linkText = 'Войти';
     handleClick = null;
-  } else if (pathname === "/signin") {
-    linkTo = "/signup";
-    linkText = "Регистрация";
+  } else if (pathname === '/signin') {
+    linkTo = '/signup';
+    linkText = 'Регистрация';
     handleClick = null;
   } else {
-    linkTo = "/signup";
-    linkText = "Выйти";
+    linkTo = '/signup';
+    linkText = 'Выйти';
     handleClick = signOut;
   }
 

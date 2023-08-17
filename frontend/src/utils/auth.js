@@ -50,11 +50,21 @@ class Auth {
       credentials: 'include',
     });
   }
+
+  signOut() {
+    return this._request(`${this._baseUrl}/signout`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+  }
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.alicehab.nomoreparties.co',
-  // baseUrl: 'http://localhost:4000',
+  // baseUrl: 'https://api.alicehab.nomoreparties.co',
+  baseUrl: 'http://localhost:4000',
   headers: {
     'Content-Type': 'application/json',
   },

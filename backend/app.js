@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 
 const NotFoundError = require('./errors/not-found-err');
 
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, signOut } = require('./controllers/users');
 const linkRegExp = require('./utils/regexp');
 
 const auth = require('./middlewares/auth');
@@ -65,6 +65,7 @@ app.post(
   }),
   login,
 );
+app.get('/signout', signOut);
 
 // Пользователь
 app.use(helmet());
