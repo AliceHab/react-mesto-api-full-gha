@@ -8,6 +8,9 @@ const BadRequestError = require('../errors/bad-req-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 
+require('dotenv').config();
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.getUsers = (req, res) => {
   User.find({})
     .then((users) => res.send({ data: users }))
@@ -81,7 +84,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        '2eff316546783160b0e6bfaf8a81862d',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         {
           expiresIn: '7d',
         },
